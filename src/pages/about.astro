@@ -1,0 +1,17 @@
+---
+import BaseLayout  from "../layouts/BaseLayout.astro";
+const name = "About";
+const description = "About";
+const aboutText = "An archive of interwar history.";
+---
+
+<BaseLayout 
+	pageTitle={name}
+	description={description}
+>
+	<div>
+		<h1>{name}</h1>
+		<p>{aboutText}</p>
+	</div>
+
+</BaseLayout>

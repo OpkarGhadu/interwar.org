@@ -1,0 +1,67 @@
+/* GLOBAL STYLING */
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+}
+
+:root { 
+  /* Global Colours */
+  --primary-color-text: #111122;
+  --primary-color-bg: #fffff8;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 100%;
+}
+
+body {
+  min-height: 100vh;
+  width: 87.5%;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: "Times New Roman", Times, serif;
+
+  display: flex;
+  flex-direction: column;
+  /* Global Text and Background Colors*/
+  color: var(--primary-color-text);
+  background-color: var(--primary-color-bg);
+}
+
+main {
+  flex: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+/* Links should match the text color of the body but be underlined */
+a {
+  color: var(--primary-color-text);
+  text-decoration: underline;
+}
+
+
+/* PAGE STYLING */
+h1 {
+  font-weight: 400;
+  margin-top: 4rem;
+  margin-bottom: 1.4rem;
+  font-size: 2rem;
+  line-height: 1;
+}
+
+p, ol, ul {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+/* Screen width above 768px - Tablets, Laptops, Desktops */
+@media screen and (min-width: 768px) {
+
+}
+

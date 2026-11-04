@@ -1,16 +1,29 @@
 ---
+import BaseLayout  from "../layouts/BaseLayout.astro";
+const name = "Home";
+const description = "An archive of interwar history.";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout 
+	pageTitle={name}
+	description={description}
+>
+	<h1>Site Currently Under Construction</h1>
+	<div class="homepage">
+		<a href="/people">People</a>
+		<a href="/events">Events</a>
+		<a href="/topics">Topics</a>
+		<a href="/donate">Donate</a>
+	</div>
+
+
+</BaseLayout>
+
+<style>
+	.homepage{
+		display: flex;
+		flex-direction: row;
+		gap: 1rem;
+		margin-bottom: 3rem;
+	}
+</style>

@@ -1,0 +1,97 @@
+---
+interface Links {
+  title: string;
+  url: string;
+}
+
+const headerLinks: Links[] = [
+  {
+    title: 'People',
+    url: '/people',
+  },
+  {
+    title: 'Events',
+    url: '/events',
+  },
+  {
+    title: 'Topics',
+    url: '/topics',
+  },
+  /*{
+  {
+    title: 'Calendar',
+    url: '/calendar',
+  },
+    title: 'Blog',
+    url: '/blog',
+  },*/
+  {
+    title: 'Donate',
+    url: '/donate',
+  },
+]
+---
+<header>
+  <div class='header-content'>
+    <a href="/" class='title'>
+      Interwar.org
+    </a>
+    <div>
+      <nav>
+        <ul class="header-link-list">
+          {headerLinks.map((link) => (
+            <li>
+              <a 
+                class="header-link-item"
+                href={link.url}
+                >{link.title}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <hr/>
+</header>
+
+<style>
+  .header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  .title {
+    text-decoration: none;
+    font-weight: 400;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+  .header-link-list{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style: none;
+    gap: 1.25rem;
+  }
+  .header-link-item {
+    font-size: 1rem;
+  }
+  
+  /* Screen width above 768px - Tablets, Laptops, Desktops */
+  @media screen and (min-width: 768px) {
+    .header-content {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    .header-link-list {
+      gap: 2rem;
+    }
+  }
+
+</style>
