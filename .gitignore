@@ -1,9 +1,10 @@
 # misc files
 todo.txt
+.wrangler/
 
 # build output
 dist/
-.wrangler/
+
 # generated types
 .astro/
 
