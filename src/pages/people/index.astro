@@ -1,8 +1,10 @@
 ---
-
 import BaseLayout  from "../../layouts/BaseLayout.astro";
+import { getAllPeople } from "../../lib/db/people";
 const name = "People";
 const description = "People";
+
+const allPeople = await getAllPeople();
 
 ---
 
@@ -13,6 +15,15 @@ const description = "People";
 	<div>
 
 		<h1>People</h1>
+		    <ul>
+        {allPeople.map((person) => (
+            <li>
+                <a href={`/people/${person.PersonId}/`}>
+                    {person.Name}
+                </a>
+            </li>
+        ))}
+    </ul>
 	</div>
 
 

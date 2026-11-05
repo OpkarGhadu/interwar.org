@@ -1,0 +1,26 @@
+export type Record = {
+  RecordId: string;
+  RecordType: string;
+  MediaFormat: string;
+  DocumentTitle: string;
+  Abstract: string | null;
+  Description: string | null;
+  Sources: string | null;
+  OriginalLanguage: string | null;
+  OriginalText: string | null;
+  TranslatedText: string | null;
+  DateCreated: string | null;
+  DatePublished: string | null;
+  DatesCoveringStart: string | null;
+  DatesCoveringEnd: string | null;
+  DateAdded: string;
+  LastUpdated: string;
+  InternetArchiveLink: string | null;
+  Rights: string | null;
+  Notes: string | null;
+  PublicationStatus: 'draft' | 'published';
+  VerificationStatus: 'unverified' | 'needs_review' | 'verified';
+  StorageKey: string | null;
+  FileFormat: string | null;
+  FileSize: number | null;
+};

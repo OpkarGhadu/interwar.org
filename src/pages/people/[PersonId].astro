@@ -1,13 +1,59 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getAllPeople } from "../../lib/db/people";
 
+export async function getStaticPaths() {
+    const people = await getAllPeople();
 
+    return people.map((person) => ({
+        params: {
+            PersonId: person.PersonId
+        },
+        props: {
+            person
+        }
+    }));
+}
 
+const { person } = Astro.props;
 ---
 
 <BaseLayout
-	pageTitle={"Person"}
-	description={"Person"}
+    pageTitle={person.Name}
+    description={person.Abstract || person.Biography || ""}
 >
+    <article>
+        <header>
+            <h1>{person.Name}</h1>
+        </header>
 
+        {person.BirthDate && (
+            <p>
+                Born: {person.BirthDate}
+                {person.DeathDate && ` — Died: ${person.DeathDate}`}
+            </p>
+        )}
+
+        {person.Abstract && (
+            <section>
+                <p>{person.Abstract}</p>
+            </section>
+        )}
+
+        {person.Biography && (
+            <section>
+                <h2>Biography</h2>
+                <p>{person.Biography}</p>
+            </section>
+        )}
+
+        {person.Quote && (
+            <blockquote>
+                <p>{person.Quote}</p>
+                {person.QuoteSource && (
+                    <cite>{person.QuoteSource}</cite>
+                )}
+            </blockquote>
+        )}
+    </article>
 </BaseLayout>
