@@ -1,7 +1,9 @@
 {
 	"$schema": "./node_modules/wrangler/config-schema.json",
 	"compatibility_date": "2026-11-01",
-	"compatibility_flags": ["global_fetch_strictly_public"],
+	"compatibility_flags": [
+		"global_fetch_strictly_public"
+	],
 	"name": "interwar",
 	"main": "@astrojs/cloudflare/entrypoints/server",
 	"assets": {
@@ -10,5 +12,20 @@
 	},
 	"observability": {
 		"enabled": true
-	}
+	},
+	"d1_databases": [
+		{
+			"binding": "interwarDB",
+			"database_name": "interwarDB",
+			"database_id": "3356a34c-ff33-4fff-9989-84d8522abb8d",
+			"remote": true
+		}
+	],
+	"r2_buckets": [
+		{
+			"bucket_name": "interwar-bucket",
+			"binding": "interwar_bucket",
+			"remote": true
+		}
+	]
 }
