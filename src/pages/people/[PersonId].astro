@@ -49,9 +49,9 @@ const { person } = Astro.props;
 
         {person.Quote && (
             <blockquote>
-                <p>{person.Quote}</p>
+                <p>"{person.Quote}"</p>
                 {person.QuoteSource && (
-                    <cite>{person.QuoteSource}</cite>
+                <cite>{person.Name}, {person.QuoteSource}</cite>
                 )}
             </blockquote>
         )}
