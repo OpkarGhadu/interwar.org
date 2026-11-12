@@ -1,0 +1,42 @@
+---
+/* 
+Quote on [PersonId] page
+*/
+const { quote, source, author } = Astro.props;
+---
+
+{ quote && 
+<figure>
+  <blockquote>
+    <q>{quote}</q>
+  </blockquote>
+  <figcaption>
+    {
+      source && (
+        <span>
+          {author}, <cite>{source}</cite>
+        </span>
+      )
+    }
+  </figcaption>
+</figure>
+}
+<style>
+  figure {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    max-width: 768px;
+  }
+  p {
+    font-size: 1.3rem;
+  }
+  figcaption {
+    display: flex;
+    justify-content: end;
+    margin-top: 1rem;
+    font-size: 1.1rem;
+  }
+  cite {
+    font-style: italic;
+  }
+</style>

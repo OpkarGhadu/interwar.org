@@ -2,66 +2,68 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getAllPeople } from "../../lib/db/people";
 
-export async function getStaticPaths() {
-    const people = await getAllPeople();
+import Quote from "../../components/Quote.astro";
 
-    return people.map((person) => ({
-        params: {
-            PersonId: person.PersonId
-        },
-        props: {
-            person
-        }
-    }));
+export async function getStaticPaths() {
+  const people = await getAllPeople();
+
+  return people.map((person) => ({
+    params: {
+      PersonId: person.PersonId,
+    },
+    props: {
+      person,
+    },
+  }));
 }
 
 const { person } = Astro.props;
 ---
 
 <BaseLayout
-    pageTitle={person.Name}
-    description={person.Abstract || person.Biography || ""}
+  pageTitle={person.Name}
+  description={person.Abstract || person.Name}
 >
-    
+  <article>
     <h1>{person.Name}</h1>
 
-    {person.Quote && (
-      <blockquote>
-        <p>"{person.Quote}"</p>
-        {person.QuoteSource && (
-        <cite>{person.Name}, {person.QuoteSource}</cite>
-        )}
-      </blockquote>
-    )} 
-    <p>####################################</p>
+    <Quote
+      quote={person.Quote}
+      source={person.QuoteSource}
+      author={person.Name}
+    />
+    
 
-    <article>
+    {
+      person.BirthDate && (
+        <p>
+          Born: {person.BirthDate}
+          {person.DeathDate && ` — Died: ${person.DeathDate}`}
+        </p>
+      )
+    }
 
-        {person.BirthDate && (
-            <p>
-                Born: {person.BirthDate}
-                {person.DeathDate && ` — Died: ${person.DeathDate}`}
-            </p>
-        )}
+    {
+      person.Abstract && (
+        <section>
+          <p>{person.Abstract}</p>
+        </section>
+      )
+    }
 
-        {person.Abstract && (
-            <section>
-                <p>{person.Abstract}</p>
-            </section>
-        )}
-
-        {person.Biography && (
-            <section>
-                <h2>Biography</h2>
-                <p>{person.Biography}</p>
-            </section>
-        )}
-
-      </article> 
-    <ul> 
-    <li>Photos</li>   
-    <li>Broadcasts</li>   
-    <li>Writings</li>   
-    <li>Books</li>   
+    {
+      person.Biography && (
+        <section>
+          <h2>Biography</h2>
+          <p>{person.Biography}</p>
+        </section>
+      )
+    }
+  </article>
+  <ul>
+    <li>Photos</li>
+    <li>Broadcasts</li>
+    <li>Writings</li>
+    <li>Books</li>
   </ul>
 </BaseLayout>
