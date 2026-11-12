@@ -22,10 +22,20 @@ const { person } = Astro.props;
     pageTitle={person.Name}
     description={person.Abstract || person.Biography || ""}
 >
+    
+    <h1>{person.Name}</h1>
+
+    {person.Quote && (
+      <blockquote>
+        <p>"{person.Quote}"</p>
+        {person.QuoteSource && (
+        <cite>{person.Name}, {person.QuoteSource}</cite>
+        )}
+      </blockquote>
+    )} 
+    <p>####################################</p>
+
     <article>
-        <header>
-            <h1>{person.Name}</h1>
-        </header>
 
         {person.BirthDate && (
             <p>
@@ -47,13 +57,11 @@ const { person } = Astro.props;
             </section>
         )}
 
-        {person.Quote && (
-            <blockquote>
-                <p>"{person.Quote}"</p>
-                {person.QuoteSource && (
-                <cite>{person.Name}, {person.QuoteSource}</cite>
-                )}
-            </blockquote>
-        )}
-    </article>
+      </article> 
+    <ul> 
+    <li>Photos</li>   
+    <li>Broadcasts</li>   
+    <li>Writings</li>   
+    <li>Books</li>   
+  </ul>
 </BaseLayout>
