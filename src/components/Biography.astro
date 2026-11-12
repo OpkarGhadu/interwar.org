@@ -1,6 +1,13 @@
 ---
-
+const {birthDate, deathDate} = Astro.props;
 ---
-<div>
-  <h2>Biography</h2>
-</div>
+<section>
+
+  {birthDate && (
+  <p>
+    Born: {birthDate}
+    {deathDate && ` — Died: ${deathDate}`}
+  </p>
+  )}
+</section>
+    

@@ -6,10 +6,9 @@ const { quote, source, author } = Astro.props;
 ---
 
 { quote && 
+<section>
 <figure>
-  <blockquote>
-    <q>{quote}</q>
-  </blockquote>
+  <blockquote>"{quote}"</blockquote>
   <figcaption>
     {
       source && (
@@ -20,14 +19,14 @@ const { quote, source, author } = Astro.props;
     }
   </figcaption>
 </figure>
+</section>
 }
 <style>
   figure {
     margin-left: 1rem;
     margin-right: 1rem;
-    max-width: 768px;
   }
-  p {
+  blockquote {
     font-size: 1.3rem;
   }
   figcaption {

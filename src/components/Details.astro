@@ -1,0 +1,40 @@
+---
+import wikidata from "../assets/wikidata.svg";
+
+const baseUrl = "https://www.wikidata.org/wiki/";
+
+const { aliases, wikidataId, birthDate, deathDate, abstract } = Astro.props;
+---
+
+<section>
+  <h2>Details</h2>
+  <div class="details-top">
+    {birthDate && <p>Birth: {birthDate}</p>}
+    {deathDate && <p>Death: {deathDate}</p>}
+
+    {aliases && <p>Also: {JSON.parse(aliases).join(", ")}</p>}
+
+    {
+      wikidataId && (
+        <a href={`${baseUrl}${wikidataId}`}>
+          <img src={wikidata.src} alt="Wikidata" width={40} />
+        </a>
+      )
+    }
+  </div>
+
+  {abstract && <p>{abstract}</p>}
+</section>
+
+<style>
+  section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .details-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+</style>
