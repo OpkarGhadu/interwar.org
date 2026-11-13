@@ -1,5 +1,5 @@
 ---
-import BaseLayout  from "../../layouts/BaseLayout.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getAllContributors } from "../../lib/db/contributors";
 const name = "Contributors";
 const description = "All Contributors";
@@ -7,23 +7,19 @@ const description = "All Contributors";
 const allContributors = await getAllContributors();
 ---
 
-<BaseLayout 
-	pageTitle={name}
-	description={description}
->
-	<div>
-
-		<h1>Contributors</h1>
-		    <ul>
-        {allContributors.map((contributor) => (
-            <li>
-                <a href={`/contributors/${contributor.Slug}/`}>
-                    {contributor.Name}
-                </a>
-            </li>
-        ))}
+<BaseLayout pageTitle={name} description={description}>
+  <div>
+    <h1>Contributors</h1>
+    <ul>
+      {
+        allContributors.map((contributor) => (
+          <li>
+            <a href={`/contributors/${contributor.Slug}/`}>
+              {contributor.Name}
+            </a>
+          </li>
+        ))
+      }
     </ul>
-	</div>
-
-
+  </div>
 </BaseLayout>

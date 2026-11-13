@@ -1,5 +1,5 @@
 export type Contributor = {
-  Id : number;
+  ContributorId : number;
   Slug: string;
   Name: string;
   Homepage: string | null;
@@ -7,7 +7,7 @@ export type Contributor = {
 }
 
 export type ContributorIndex = {
-  Id: number;
+  ContributorId: number;
   Slug: string;
   Name: string;
 }

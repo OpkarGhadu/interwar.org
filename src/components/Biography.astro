@@ -1,10 +1,23 @@
 ---
 const { biography } = Astro.props;
 ---
-{ biography && (
 
-  <section>
-  <h2>Biography</h2>
-  <p>{biography}</p>
-</section>
-)}
+{
+  biography && (
+    <section>
+      <h2>Biography</h2>
+      <pre>{biography}</pre>
+    </section>
+  )
+}
+
+<style>
+  section {
+    max-width: 750px;
+  }
+  pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: inherit;
+  }
+</style>

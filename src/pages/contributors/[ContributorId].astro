@@ -1,0 +1,29 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getAllContributors } from "../../lib/db/contributors";
+
+export async function getStaticPaths() {
+  const contributors = await getAllContributors();
+
+  return contributors.map((contributor) => ({
+    params: {
+      ContributorId: contributor.Slug,
+    },
+    props: {
+      contributor,
+    },
+  }));
+};
+
+const { contributor } = Astro.props;
+---
+<BaseLayout pageTitle={contributor.Name} description={contributor.Name}>
+  <div>
+    <p>Name: {contributor.Name}</p>
+    <p>HomePage: <a href={contributor.Homepage}>
+      {contributor.Homepage}
+    </a>
+    </p>
+    <p>About: {contributor.About}</p>
+  </div>
+</BaseLayout>
