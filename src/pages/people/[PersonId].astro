@@ -5,6 +5,7 @@ import { getAllPeople } from "../../lib/db/people";
 import Quote from "../../components/Quote.astro";
 import Details from "../../components/Details.astro";
 import Biography from "../../components/Biography.astro";
+import Records from "../../components/Records.astro";
 import Credits from "../../components/Credits.astro";
 
 export async function getStaticPaths() {
@@ -18,25 +19,7 @@ export async function getStaticPaths() {
       person,
     },
   }));
-}
-
-/* 
-export type Person = {
-  --PersonId: string;
-  ++Name: string;
-  --SortName: string;
-  ##Aliases: string | null;
-  ##WikidataId: string | null;
-  ##BirthDate: string | null;
-  ##DeathDate: string | null;
-  Biography: string | null;
-  ##Abstract: string | null;
-  __Quote: string | null;
-  __QuoteSource: string | null;
-  LastUpdated: string;
 };
-
-*/
 
 const { person } = Astro.props;
 ---
@@ -45,8 +28,11 @@ const { person } = Astro.props;
   pageTitle={person.Name}
   description={person.Abstract || person.Name}
 >
-  <article>
-    <h1>{person.Name}</h1>
+  <article class="person-page">
+
+    <header class="person-header">
+      <h1>{person.Name}</h1>
+    </header>
 
     <Quote
       quote={person.Quote}
@@ -63,21 +49,30 @@ const { person } = Astro.props;
     />
 
     <Biography
-
+      biography={person.Biography}
     />
     
-    <p>Content</p>
-    <ul>
-      <li>Photos</li>
-      <li>Broadcasts</li>
-      <li>Writings</li>
-      <li>Books</li>
-    </ul>
+    <Records/>
     
+
     <Credits
       lastUpdated={person.LastUpdated}
     />
 
   </article>
 </BaseLayout>
+
+<style>
+.person-page {
+  max-width: 900px;
+  margin-inline: auto;
+}
+
+.person-header{
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+}
+
+</style>
+
 

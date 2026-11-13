@@ -1,40 +1,103 @@
 ---
-import wikidata from "../assets/wikidata.svg";
-
+import wikidataIcon from "../assets/wikidata.svg";
 const baseUrl = "https://www.wikidata.org/wiki/";
 
 const { aliases, wikidataId, birthDate, deathDate, abstract } = Astro.props;
+const parsedAliases = aliases ? JSON.parse(aliases) : [];
 ---
 
-<section>
+<section class="details">
   <h2>Details</h2>
-  <div class="details-top">
-    {birthDate && <p>Birth: {birthDate}</p>}
-    {deathDate && <p>Death: {deathDate}</p>}
 
-    {aliases && <p>Also: {JSON.parse(aliases).join(", ")}</p>}
-
+  <dl>
     {
-      wikidataId && (
-        <a href={`${baseUrl}${wikidataId}`}>
-          <img src={wikidata.src} alt="Wikidata" width={40} />
-        </a>
+      birthDate && (
+        <div class="detail-item">
+          <dt>Born</dt>
+          <dd>{birthDate}</dd>
+        </div>
       )
     }
-  </div>
 
-  {abstract && <p>{abstract}</p>}
+    {
+      deathDate && (
+        <div class="detail-item">
+          <dt>Died</dt>
+          <dd>{deathDate}</dd>
+        </div>
+      )
+    }
+
+    {
+      parsedAliases.length > 0 && (
+        <div class="detail-item">
+          <dt>Also known as</dt>
+          <dd>{parsedAliases.join(", ")}</dd>
+        </div>
+      )
+    }
+  </dl>
+
+  {abstract && <p class="abstract">{abstract}</p>}
+
+  {
+    wikidataId && (
+      <a class="wikidata-link" href={`${baseUrl}${wikidataId}`}>
+        <img
+          src={wikidataIcon.src}
+          alt="Wikidata Link"
+          width="24"
+          height="24"
+        />
+        <span>View on Wikidata</span>
+      </a>
+    )
+  }
 </section>
 
 <style>
-  section {
+  .details {
     display: flex;
     flex-direction: column;
+    gap: 1rem;
   }
 
-  .details-top {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+  dl {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem 2rem;
+    margin: 0;
   }
+
+  .detail-item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.75rem;
+  }
+
+  dt {
+    font-weight: 600;
+  }
+
+  dd {
+    margin: 0;
+  }
+
+  .abstract {
+    line-height: 1.6;
+  }
+
+  .wikidata-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: fit-content;
+  }
+
+  media (max-width: 768px) {
+    dl {
+      grid-template-columns: 1fr;
+    }
+  }
+
 </style>

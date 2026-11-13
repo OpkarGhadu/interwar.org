@@ -7,33 +7,35 @@ const { quote, source, author } = Astro.props;
 
 { quote && 
 <section>
-<figure>
-  <blockquote>"{quote}"</blockquote>
-  <figcaption>
-    {
-      source && (
-        <span>
-          {author}, <cite>{source}</cite>
-        </span>
-      )
-    }
-  </figcaption>
-</figure>
+  <figure>
+    <blockquote>"{quote}"</blockquote>
+    <figcaption>
+      {
+        source && (
+          <span>
+            {author}, <cite>{source}</cite>
+          </span>
+        )
+      }
+    </figcaption>
+  </figure>
 </section>
 }
 <style>
-  figure {
-    margin-left: 1rem;
-    margin-right: 1rem;
+  section {
+    max-width: 750px;
+    margin: 2rem auto 3rem;
   }
   blockquote {
+    margin: 0;
     font-size: 1.3rem;
+    line-height: 1.6;
   }
   figcaption {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     margin-top: 1rem;
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
   cite {
     font-style: italic;
