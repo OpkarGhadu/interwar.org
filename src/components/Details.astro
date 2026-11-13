@@ -5,6 +5,7 @@ import wikipediaIcon from "../assets/wikipedia.svg";
 const { aliases, wikidataId, birthDate, deathDate, abstract } = Astro.props;
 const parsedAliases = aliases ? JSON.parse(aliases) : [];
 const wikidataUrl = `https://www.wikidata.org/wiki/${wikidataId}`;
+// Wikipedia can use wikidata ID to find page
 const wikipediaUrl = `https://www.wikidata.org/wiki/Special:GoToLinkedPage/enwiki/${wikidataId}`;
 ---
 
@@ -44,24 +45,26 @@ const wikipediaUrl = `https://www.wikidata.org/wiki/Special:GoToLinkedPage/enwik
 
   {
     wikidataId && (
-      <a class="wikidata-link" href={wikidataUrl}>
+      <div class="wiki-link-list">
+      <a class="wiki-link" href={wikidataUrl}>
         <img
           src={wikidataIcon.src}
           alt="Wikidata Link"
           width="24"
           height="24"
-        />
+          />
         <span>View on Wikidata</span>
       </a>
-      <a class="wikidata-link" href={wikipediaUrl}>
+      <a class="wiki-link" href={wikipediaUrl}>
         <img
           src={wikipediaIcon.src}
           alt="Wikipedia Link"
           width="24"
           height="24"
-        />
+          />
         <span>View on Wikipedia</span>
       </a>
+      </div>
     )
   }
 </section>
@@ -97,8 +100,13 @@ const wikipediaUrl = `https://www.wikidata.org/wiki/Special:GoToLinkedPage/enwik
   .abstract {
     line-height: 1.6;
   }
-
-  .wikidata-link {
+  .wiki-link-list{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem 2rem;
+    margin: 0;
+  }
+  .wiki-link {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;

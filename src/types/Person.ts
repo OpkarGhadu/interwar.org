@@ -10,7 +10,8 @@ export type Person = {
   Abstract: string | null;
   Quote: string | null;
   QuoteSource: string | null;
-  LastUpdated: string;
+  DateAdded: string;
+  DateUpdated: string;
 };
 
 
