@@ -1,4 +1,4 @@
-/* GLOBAL STYLING */
+@charset "UTF-8";
 
 *, *::before, *::after {
   margin: 0;
@@ -23,7 +23,6 @@ body {
   margin-left: auto;
   margin-right: auto;
   font-family: "Times New Roman", Times, serif;
-
   display: flex;
   flex-direction: column;
   /* Global Text and Background Colors*/
@@ -40,11 +39,15 @@ main {
 }
 
 /* Links should match the text color of the body but be underlined */
-a {
-  color: var(--primary-color-text);
-  text-decoration: underline;
-}
 
+a:link,
+a:visited,
+a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 0.1em;
+    text-decoration-thickness: 0.05em;
+}
 
 /* PAGE STYLING */
 h1 {
@@ -55,6 +58,15 @@ h1 {
   line-height: 1;
 }
 
+h2 {
+    font-style: italic;
+    font-weight: 400;
+    margin-top: 2.1rem;
+    margin-bottom: 1.4rem;
+    font-size: 2.2rem;
+    line-height: 1;
+}
+
 p, ol, ul {
   font-size: 1rem;
   line-height: 1.5rem;
@@ -62,8 +74,11 @@ p, ol, ul {
 
 section {
   max-width: 750px;
-  margin: 2rem auto 3rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
+
+
 
 /* Screen width above 768px - Tablets, Laptops, Desktops */
 @media screen and (min-width: 768px) {

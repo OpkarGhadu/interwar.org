@@ -1,13 +1,17 @@
 ---
 import wikidataIcon from "../assets/wikidata.svg";
-const baseUrl = "https://www.wikidata.org/wiki/";
+import wikipediaIcon from "../assets/wikipedia.svg";
 
 const { aliases, wikidataId, birthDate, deathDate, abstract } = Astro.props;
 const parsedAliases = aliases ? JSON.parse(aliases) : [];
+const wikidataUrl = `https://www.wikidata.org/wiki/${wikidataId}`;
+const wikipediaUrl = `https://www.wikidata.org/wiki/Special:GoToLinkedPage/enwiki/${wikidataId}`;
 ---
 
 <section class="details">
   <h2>Details</h2>
+
+  {abstract && <p class="abstract">{abstract}</p>}
 
   <dl>
     {
@@ -38,11 +42,9 @@ const parsedAliases = aliases ? JSON.parse(aliases) : [];
     }
   </dl>
 
-  {abstract && <p class="abstract">{abstract}</p>}
-
   {
     wikidataId && (
-      <a class="wikidata-link" href={`${baseUrl}${wikidataId}`}>
+      <a class="wikidata-link" href={wikidataUrl}>
         <img
           src={wikidataIcon.src}
           alt="Wikidata Link"
@@ -50,6 +52,15 @@ const parsedAliases = aliases ? JSON.parse(aliases) : [];
           height="24"
         />
         <span>View on Wikidata</span>
+      </a>
+      <a class="wikidata-link" href={wikipediaUrl}>
+        <img
+          src={wikipediaIcon.src}
+          alt="Wikipedia Link"
+          width="24"
+          height="24"
+        />
+        <span>View on Wikipedia</span>
       </a>
     )
   }
