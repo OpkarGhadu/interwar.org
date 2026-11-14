@@ -1,13 +1,42 @@
 ---
+import type { Record } from "../types/Record";
 
+interface Props {
+  records: Record[];
+}
+
+const { records } = Astro.props;
+
+const categories = [
+  { type: "photograph", title: "Photographs" },
+  { type: "book", title: "Books" },
+  { type: "broadcast", title: "Broadcasts" },
+  { type: "article", title: "Articles" },
+  { type: "letter", title: "Letters" },
+  { type: "speech", title: "Speeches" },
+  { type: "interview", title: "Interviews" },
+  { type: "diary", title: "Diaries" },
+  { type: "document", title: "Documents" },
+  { type: "anecdote", title: "Anecdotes" },
+];
+
+const groupedRecords = categories
+  .map((category) => ({
+    ...category,
+    records: records
+      .filter((record) => record.RecordType === category.type)
+      .sort((a, b) => {
+        const dateA = a.DatePublished || a.DateCreated || a.DateAdded;
+        const dateB = b.DatePublished || b.DateCreated || b.DateAdded;
+        return dateB.localeCompare(dateA);
+      }),
+  }))
+  .filter((category) => category.records.length > 0);
 ---
 
-<section>
-  <h2>Records</h2>
-  <ul>
-    <li><a href="#photos">Photographs</a></li>
-    <li><a href="#broadcasts">Broadcasts</a></li>
-    <li><a href="#writings">Writings</a></li>
-    <li><a href="#books">Books</a></li>
-  </ul>
-</section>
+{groupedRecords.length > 0 && (
+  <section class="records">
+    <h2>Records</h2>
+
+  </section>
+)}

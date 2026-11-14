@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getAllPeople } from "../../lib/db/people";
+import { getRecordsForPerson } from "../../lib/db/records";
 
 import Quote from "../../components/Quote.astro";
 import Details from "../../components/Details.astro";
@@ -22,6 +23,7 @@ export async function getStaticPaths() {
 };
 
 const { person } = Astro.props;
+const records = await getRecordsForPerson(person.PersonId);
 ---
 
 <BaseLayout
@@ -52,9 +54,10 @@ const { person } = Astro.props;
       biography={person.Biography}
     />
     
-    <Records/>
+    <Records
+      records={records}
+    />
     
-
     <Credits
       dateAdded={person.DateAdded}
       dateUpdated={person.DateUpdated}
