@@ -2,17 +2,30 @@
 import BaseLayout  from "../layouts/BaseLayout.astro";
 const name = "About";
 const description = "About";
-const aboutText = "An archive of interwar history.";
 ---
 
 <BaseLayout 
 	pageTitle={name}
 	description={description}
 >
-	<div>
+	<article>
 		<h1>{name}</h1>
-		<p>{aboutText}</p>
-		<p>No AI has been used for this website. Every addition is carefully considered.</p>
-	</div>
+			<p>
+				No AI was used in the making of this website. All additions are carefully considered and made at the pace of my own reading.
+			</p>
+
+			<p>
+				This website is completely independent: it collects no personal data, uses no tracking, and serves no ads. 
+				If you find value in this work and would like to help keep it running, please consider <a href="/donate">making a donation</a>.
+			</p>
+		</article>
 
 </BaseLayout>
+
+<style>
+article {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+</style>

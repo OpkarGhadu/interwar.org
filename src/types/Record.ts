@@ -6,9 +6,9 @@ export type Record = {
   // General
   RecordType: string; // Photo, letter, broadcast, article
   MediaFormat: string; // image, audio, video, text, files
-  DocumentTitle: string;
-  Abstract: string | null;  // Describes record's contents
-  Description: string | null;
+  DocumentTitle: string; // what the item is called
+  Abstract: string | null;  // what the item contains
+  Description: string | null; // additional context about the item
   Sources: string | null;
 
   // Text
@@ -29,7 +29,7 @@ export type Record = {
 
   // Media
   StorageKey: string | null; // Not every record is in R2
-  Caption: string | null; // What is visible in an image
+  Caption: string | null; // what the viewer sees
 
   // Administration
   Rights: string | null;
