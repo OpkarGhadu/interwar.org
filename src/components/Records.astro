@@ -6,7 +6,7 @@ interface Props {
 }
 
 const { records } = Astro.props;
-
+/*
 const categories = [
   { type: "photograph", title: "Photographs" },
   { type: "book", title: "Books" },
@@ -18,13 +18,20 @@ const categories = [
   { type: "diary", title: "Diaries" },
   { type: "document", title: "Documents" },
   { type: "anecdote", title: "Anecdotes" },
+];*/
+
+const categories = [
+  { type: "image", title: "Images" },
+  { type: "audio", title: "Audio" },
+  { type: "text", title: "Texts" },
+  { type: "video", title: "Videos" },
 ];
 
 const groupedRecords = categories
   .map((category) => ({
     ...category,
     records: records
-      .filter((record) => record.RecordType === category.type)
+      .filter((record) => record.MediaFormat === category.type)
       .sort((a, b) => {
         const dateA = a.Date || a.DateAdded;
         const dateB = b.Date || b.DateAdded;
@@ -33,57 +40,48 @@ const groupedRecords = categories
   }))
   .filter((category) => category.records.length > 0);
 
-const mediaURL = "https://media.interwar.org";
+// const mediaURL = "https://media.interwar.org";
 // console.log("Records: ", records);
 
-/* 
-To Do:
-- 4 categories of records: audio, image, text, video
-- 
-*/
+
 ---
 
+
 {groupedRecords.length > 0 && (
+  <section class="records">
+    <h2>Records</h2>
 
-  <section class="records">     <h2>Records</h2>
+    <nav>
+      {groupedRecords.map((category) => (
+        <a href={`#${category.type}`}>{category.title}</a>
+      ))}
+    </nav>
 
-{groupedRecords.map((category) => (
-  <section>
-    <h3>{category.title}</h3>
+    {groupedRecords.map((category) => (
+      <section id={category.type}>
+        <h3>{category.title}</h3>
 
-    {category.records.map((record) => (
-      <article>
-        {record.StorageKey && record.MediaFormat === "image" && (
-          <img
-            src={`${mediaURL}/${record.StorageKey}`}
-            alt={record.Abstract || "Photograph"}
-            loading="lazy"
-          />
-        )}
-
-        {record.StorageKey && record.MediaFormat === "audio" && (
-          <audio controls preload="none">
-            <source src={`${mediaURL}/${record.StorageKey}`} />
-          </audio>
-        )}
-
-        {record.StorageKey && record.MediaFormat === "video" && (
-          <video controls preload="metadata">
-            <source src={`${mediaURL}/${record.StorageKey}`} />
-          </video>
-        )}
-
-        <h4>{record.DocumentTitle}</h4>
-
-        {record.Abstract && <p>{record.Abstract}</p>}
-      </article>
+        <ul>
+          {category.records.map((record) => (
+            <li>
+              <a href={`/records/${record.Slug}`}>
+                {record.DocumentTitle}
+              </a>
+              {record.Date && <span> — {record.Date}</span>}
+            </li>
+          ))}
+        </ul>
+      </section>
     ))}
   </section>
-))}
-
-</section> )}
+)}
 
 <style>
+nav {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
 .records img {
   display: block;
   max-height: 300px;
