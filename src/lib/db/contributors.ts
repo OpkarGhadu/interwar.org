@@ -5,9 +5,9 @@ export async function getContributorIndex(){
 
   const { results } = await env.interwarDB
   .prepare(`
-    SELECT ContributorId, Name, Slug 
+    SELECT ContributorId, Slug, Name, SortName 
     FROM Contributors 
-    ORDER BY Id
+    ORDER BY SortName
     `)
     .all<ContributorIndex>();
     

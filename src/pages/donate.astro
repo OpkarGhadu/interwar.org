@@ -2,6 +2,18 @@
 import BaseLayout  from "../layouts/BaseLayout.astro";
 const name = "Donate";
 const description = "Donate to Interwar";
+
+interface Link {
+  title: string;
+  url: string;
+}
+
+const DonationLinks: Link[] = [
+ {
+	title: "Github Sponsors",
+	url: "https://github.com/sponsors/OpkarGhadu"
+ }
+]
 ---
 
 <BaseLayout 
@@ -10,6 +22,11 @@ const description = "Donate to Interwar";
 >
 	<div>
 		<h1>{name}</h1>
+		<ul>
+			{DonationLinks.map((link) => (
+				<li><a href={link.url}>{link.title}</a></li>
+			))}
+		</ul>
 	</div>
 
 </BaseLayout>

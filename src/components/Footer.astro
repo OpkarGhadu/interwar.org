@@ -1,17 +1,17 @@
 ---
-const mailIcon = "src/assets/mail-fill.svg";
-const githubIcon = "src/assets/github-fill.svg";
+//const mailIcon = "src/assets/mail-fill.svg";
+//const githubIcon = "src/assets/github-fill.svg";
 
 const currentYear = new Date().getFullYear();
 
 const description = "An archive of interwar history.";
 
-interface Links {
+interface Link {
   title: string;
   url: string;
 }
 
-const internalLinks: Links[] = [
+const internalLinks: Link[] = [
   {
     title: "About",
     url: "/about",
@@ -30,7 +30,7 @@ const internalLinks: Links[] = [
   },
 ];
 
-const externalLinks: Links[] = [
+const externalLinks: Link[] = [
   {
     title: "Email",
     url: "mailto:oghadu@gmail.com",

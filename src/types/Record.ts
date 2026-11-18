@@ -16,11 +16,7 @@ export type Record = {
   OriginalText: string | null;
   TranslatedText: string | null;
 
-  // Dates
-  DateCreated: string | null;
-  DatePublished: string | null;
-  DatesCoveringStart: string | null;
-  DatesCoveringEnd: string | null;
+  // Auto Dates
   DateAdded: string;
   DateUpdated: string;
 
@@ -35,4 +31,9 @@ export type Record = {
   Rights: string | null;
   Notes: string | null;
   PublicationStatus: 0 | 1;
+
+  // Dates
+  Date: string | null; // Date of event discussed
+  DateEnd: string | null; // If range, date end
+
 };

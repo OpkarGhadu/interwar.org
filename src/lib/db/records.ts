@@ -18,7 +18,7 @@ export async function getRecordsForPerson(personId: number): Promise<Record[]> {
         AND rel.RelationshipType IN ('features', 'created_by')
         AND r.PublicationStatus = 1
       ORDER BY
-        COALESCE(r.DatePublished, r.DateCreated, r.DateAdded) DESC
+        COALESCE(r.Date, r.DateAdded) DESC
     `)
     .bind(String(personId))
     .all<Record>();
