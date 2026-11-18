@@ -32,11 +32,57 @@ const groupedRecords = categories
       }),
   }))
   .filter((category) => category.records.length > 0);
+
+const mediaURL = "https://media.interwar.org";
 ---
 
 {groupedRecords.length > 0 && (
-  <section class="records">
-    <h2>Records</h2>
 
+  <section class="records">     <h2>Records</h2>
+
+{groupedRecords.map((category) => (
+  <section>
+    <h3>{category.title}</h3>
+
+    {category.records.map((record) => (
+      <article>
+        {record.StorageKey && record.MediaFormat === "image" && (
+          <img
+            src={`${mediaURL}/${record.StorageKey}`}
+            alt={record.Abstract || "Photograph"}
+            loading="lazy"
+          />
+        )}
+
+        {record.StorageKey && record.MediaFormat === "audio" && (
+          <audio controls preload="none">
+            <source src={`${mediaURL}/${record.StorageKey}`} />
+          </audio>
+        )}
+
+        {record.StorageKey && record.MediaFormat === "video" && (
+          <video controls preload="metadata">
+            <source src={`${mediaURL}/${record.StorageKey}`} />
+          </video>
+        )}
+
+        <h4>{record.DocumentTitle}</h4>
+
+        {record.Abstract && <p>{record.Abstract}</p>}
+      </article>
+    ))}
   </section>
-)}
+))}
+
+</section> )}
+
+<style>
+.records img {
+  display: block;
+  max-height: 300px;
+  max-width: 100%;
+  width: auto;
+  object-fit: contain;
+  margin-bottom: 1rem;
+}
+</style>

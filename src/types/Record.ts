@@ -1,16 +1,21 @@
 export type Record = {
-  // All
-  RecordId: string;
-  RecordType: string;
-  MediaFormat: string;
+  // Identity
+  RecordId: number;
+  Slug: string;
+
+  // General
+  RecordType: string; // Photo, letter, broadcast, article
+  MediaFormat: string; // image, audio, video, text, files
   DocumentTitle: string;
-  Abstract: string | null;
+  Abstract: string | null;  // Describes record's contents
   Description: string | null;
   Sources: string | null;
-  // Text Documents and Recordings
+
+  // Text
   OriginalLanguage: string | null;
   OriginalText: string | null;
   TranslatedText: string | null;
+
   // Dates
   DateCreated: string | null;
   DatePublished: string | null;
@@ -18,13 +23,16 @@ export type Record = {
   DatesCoveringEnd: string | null;
   DateAdded: string;
   DateUpdated: string;
+
   // External Reference
   InternetArchiveLink: string | null;
+
   // Media
-  StorageKey: string | null;
-  Caption: string | null; // Can be Abstract
-  // Admin
+  StorageKey: string | null; // Not every record is in R2
+  Caption: string | null; // What is visible in an image
+
+  // Administration
   Rights: string | null;
   Notes: string | null;
-  PublicationStatus: 'draft' | 'published';
+  PublicationStatus: 0 | 1;
 };

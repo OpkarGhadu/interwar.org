@@ -1,30 +1,21 @@
 ---
-import BaseLayout  from "../../layouts/BaseLayout.astro";
-import { getAllPeople } from "../../lib/db/people";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getPeopleIndex } from "../../lib/db/people";
 const name = "People";
 const description = "People";
 
-const allPeople = await getAllPeople();
-
+const peopleIndex = await getPeopleIndex();
 ---
 
-<BaseLayout 
-	pageTitle={name}
-	description={description}
->
-	<div>
-
-		<h1>People</h1>
-		    <ul>
-        {allPeople.map((person) => (
-            <li>
-                <a href={`/people/${person.PersonId}/`}>
-                    {person.Name}
-                </a>
-            </li>
-        ))}
+<BaseLayout pageTitle={name} description={description}>
+  <div>
+    <h1>People</h1>
+    <ul>
+      {peopleIndex.map((person) => (
+        <li>
+          <a href={`/people/${person.Slug}/`}>{person.Name}</a>
+        </li>
+      ))}
     </ul>
-	</div>
-
-
+  </div>
 </BaseLayout>

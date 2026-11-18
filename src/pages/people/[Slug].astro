@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { getAllPeople } from "../../lib/db/people";
+import { getPeoplePaths, getPersonById } from "../../lib/db/people";
 import { getRecordsForPerson } from "../../lib/db/records";
 
 import Quote from "../../components/Quote.astro";
@@ -10,20 +10,22 @@ import Records from "../../components/Records.astro";
 import Credits from "../../components/Credits.astro";
 
 export async function getStaticPaths() {
-  const people = await getAllPeople();
+  const people = await getPeoplePaths();
 
   return people.map((person) => ({
     params: {
-      PersonId: person.PersonId,
+      Slug: person.Slug,
     },
     props: {
-      person,
+      personId: person.PersonId
     },
   }));
 };
 
-const { person } = Astro.props;
+const { personId } = Astro.props;
+const person = await getPersonById(personId);
 const records = await getRecordsForPerson(person.PersonId);
+console.log("RECORDS: ", records);
 ---
 
 <BaseLayout
@@ -53,9 +55,9 @@ const records = await getRecordsForPerson(person.PersonId);
     <Biography
       biography={person.Biography}
     />
-    
+
     <Records
-      records={records}
+    records={records}
     />
     
     <Credits
